@@ -1,13 +1,11 @@
 {
-    "test":"Test eng",
-    "cart":{
-        "links": {
-            "index": "ГЛАВНАЯ",
-            "price": "ЦЕНЫ",
-            "news": "НОВОСТИ",
-            "collaboration": "СОТРУДНИЧЕСТВО",
-            "franchise": "ФРАНШИЗА",
-            "clubs": "НАШИ КЛУБЫ"
-        }
+ 
+    "navbar": {
+        "index": "Рассрочка",
+        "price": "Скидки",
+        "news": "Розыгрыши",
+        "collaboration": "Каталог",
+        "favourite":"Избранное",
+        "cart":"Корзина"
     }
 }

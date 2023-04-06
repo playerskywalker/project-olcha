@@ -1,12 +1,13 @@
 {
-    "test":"Test ru",
-        "links": {
-            "index": "fgush",
-            "price": "idjsfinf",
-            "news": "НОВОСТИ",
-            "collaboration": "СОТРУДНИЧЕСТВО",
-            "franchise": "ФРАНШИЗА",
-            "clubs": "НАШИ КЛУБЫ"
+ 
+        "navbar": {
+            "index": "Рассрочка",
+            "price": "Скидки",
+            "news": "Розыгрыши",
+            "collaboration": "Каталог",
+            "favourite":"Избранное",
+            "cart":"Корзина"
         }
+
     
 }

@@ -1,7 +1,6 @@
 
 <template>
 <div>
-  <h1>hello {{ $t('test') }}</h1>
   <router-view></router-view>
 </div>
 </template>

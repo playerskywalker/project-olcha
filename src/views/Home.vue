@@ -50,73 +50,68 @@
     <Footer></Footer>
   </div>
 </template>
-<script lang="ts" setup>
+<script >
 import Navbar from "../components/Header/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import router from "../router/index";
-import { mapMutations } from "vuex";
+import { mapMutations,mapActions } from "vuex";
 import { ElButton } from "element-plus";
 import { ElRow, ElCol, ElCarousel,ElInput} from "element-plus";
-import { onMounted, ref } from 'vue'
+export default {
+  data() {
+    return {
+      search:'',
+      state1:'',
+      restaurants:[],
 
- let search = ref('')
-function goToProducts() {
+    };
+  },
+  components: {
+    Navbar,Footer
+  },
+  methods: {
+    ...mapActions(['search']),
+    goToProducts() {
     router.push("/products");
-}
-const state1 = ref('')
-const state2 = ref('')
-
-const restaurants = ref([])
-const querySearch = (queryString, cb) => {
+},
+querySearch(queryString, cb){
   const results = queryString
     ? restaurants.value.filter(createFilter(queryString))
     : restaurants.value
   // call callback function to return suggestions
   cb(results)
-}
-const createFilter = (queryString) => {
+},
+createFilter(queryString){
   return (restaurant) => {
     return (
       restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
     )
   }
-}
-
-const loadAll = () => {
-  return [
-    { value: 'iPhone 9', link: "/products" },
-    { value: 'iPhone X', link: 'https://github.com/ElemeFE/element' },
-    { value: 'Samsung Universe 9', link: 'https://github.com/ElemeFE/cooking' },
-    { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
-    { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
-    { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
-    { value: 'babel', link: 'https://github.com/babel/babel' },
-  ]
-}
-function fetchInput(){
+},
+fetchInput(){
         fetch("https://dummyjson.com/products", {
           method: "GET",
         }).then((res) => {
          console.log(res)
         });
-      }
-     function scroll(){
+      },
+  scroll(){
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: 'smooth'
-      });
-    }
-const handleSelect = (item: RestaurantItem) => {
-  console.log(item)
-}
+      })
+    },
 
-onMounted(() => {
-    fetchInput()
-})
-onMounted(() => {
-    restaurants.value = loadAll()
-})
+
+  },
+  computed: {
+   
+  },
+  mounted() {
+    this.fetchInput()
+}
+}
 </script>
 <style>
 .el-carousel__container {

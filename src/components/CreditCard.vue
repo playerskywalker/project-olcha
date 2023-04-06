@@ -15,12 +15,12 @@
                 <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" class="card-item__chip">
                 <div class="card-item__type">
                   <transition name="slide-fade-up">
-                 <img :src="getImageUrl(getCardType)"  v-if="getCardType" v-bind:key="getCardType" alt="" class="card-item__typeImg">
+                 <img :src="getCardType"  v-if="getCardType" v-bind:key="getCardType" alt="" class="card-item__typeImg">
                   </transition>
                 </div>
               </div>
               <label for="cardNumber" class="card-item__number" ref="cardNumber">
-                <template v-if="getCardType === 'amex'">
+                <template v-if="getCardType === 'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/amex.png'">
                  <span v-for="(n, $index) in amexCardMask" :key="$index">
                   <transition name="slide-fade-up">
                     <div
@@ -95,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="card-item__side -back">
+		  <div class="card-item__side -back">
             <div class="card-item__cover">
               <img
               v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + currentCardBackground + '.jpeg'" class="card-item__bg">
@@ -110,7 +110,7 @@
 
               </div>
                 <div class="card-item__type">
-                    <img v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + getCardType + '.png'" v-if="getCardType" class="card-item__typeImg">
+                    <img v-bind:src="getCardType" v-if="getCardType" class="card-item__typeImg">
                 </div>
             </div>
           </div>
@@ -181,28 +181,28 @@ export default{
     getCardType () {
       let number = this.cardNumber;
       let re = new RegExp("^4");
-      if (number.match(re) != null) return "visa";
+      if (number.match(re) != null) return "https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/visa.png";
 
       re = new RegExp("^(34|37)");
-      if (number.match(re) != null) return "amex";
+      if (number.match(re) != null) return "https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/amex.png";
 
       re = new RegExp("^5[1-5]");
-      if (number.match(re) != null) return "mastercard";
+      if (number.match(re) != null) return "https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/mastercard.png";
 
       re = new RegExp("^6011");
-      if (number.match(re) != null) return "discover";
+      if (number.match(re) != null) return "https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/discover.png";
       
       re = new RegExp('^9792')
-      if (number.match(re) != null) return 'troy';
+      if (number.match(re) != null) return 'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/troy.png';
 	  re = new RegExp('^8600');
-      if (number.match(re) != null) return "uzcard";
+      if (number.match(re) != null) return "https://logobank.uz:8005/media/logos_png/Uzcard-01.png";
 	  re = new RegExp('^9860');
-      if (number.match(re) != null) return "humo";
+      if (number.match(re) != null) return "https://kapital24.uz/upload/media/icons/cards/system-humo_c.png";
 
       return "visa"; // default type
     },
 		generateCardNumberMask () {
-			return this.getCardType === "amex" ? this.amexCardMask : this.otherCardMask;
+			return this.getCardType === "https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/amex.png" ? this.amexCardMask : this.otherCardMask;
     },
     minCardMonth () {
       if (this.cardYear === this.minCardYear) return new Date().getMonth() + 1;
@@ -217,9 +217,6 @@ export default{
     }
   },
   methods: {
-getImageUrl(getCardType){
-        return new URL(`../assets/${getCardType}`)
-    },
     flipCard (status) {
       this.isCardFlipped = status;
     },

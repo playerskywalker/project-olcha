@@ -3,9 +3,9 @@
     <nav class="navbar">
       <div style="display: flex;">
         <h3 @click="goHome" class="nav-logo">OLCHA</h3>
-        <div class="nav-but">0% Рассрочка</div>
-        <div class="nav-but-two">Скидки</div>
-        <div class="nav-but">Розыгрыши</div>
+        <div class="nav-but">0% {{ $t('navbar.index') }}</div>
+        <div class="nav-but-two">{{ $t('navbar.price') }}</div>
+        <div class="nav-but">{{ $t('navbar.news') }}</div>
       </div>
      <button @click="goToProducts" class="nav-button">
       <div>
@@ -13,7 +13,7 @@
         <span class="ham"></span>
         <span class="ham"></span>
       </div>
-      Каталог</button>
+      {{ $t('navbar.collaboration') }}</button>
     </nav>
     <div style="display: flex; justify-content: flex-end">
       <el-badge :value="liked_products?.length" class="item">
@@ -24,7 +24,7 @@
               src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
               alt=""
             />
-            Избранное
+            {{ $t('navbar.favourite') }}
           </div>
         </el-button>
       </el-badge>
@@ -36,7 +36,7 @@
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/%D0%98%D0%BA%D0%BE%D0%BD%D0%BA%D0%B0_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BA%D0%BE%D1%80%D0%B7%D0%B8%D0%BD%D1%8B_%28ei%29.svg/1200px-%D0%98%D0%BA%D0%BE%D0%BD%D0%BA%D0%B0_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BA%D0%BE%D1%80%D0%B7%D0%B8%D0%BD%D1%8B_%28ei%29.svg.png"
               alt=""
             />
-            Корзина
+            {{ $t('navbar.cart') }}
           </div>
         </el-button>
       </el-badge>

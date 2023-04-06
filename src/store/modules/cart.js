@@ -17,8 +17,7 @@ const cart = {
       mutations: {
         SEARCH(state, payload) {
           console.log(payload.products)
-          payload.products.map((ell)=>ell.value=ell.title)
-      
+          state.search=payload.products
           console.log(payload.products)
         },
         GET_FAVOURITE(state, payload) {
@@ -146,6 +145,7 @@ const cart = {
         },
         async search({commit}){
           await axios.get('https://dummyjson.com/products').then((res) => {
+            console.log(res)
             commit('SEARCH', res.data)
           })
         },
