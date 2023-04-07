@@ -10,12 +10,13 @@ import 'element-plus/dist/index.css'
 import { languages } from './locales/index.js'
 
 const messages= Object.assign(languages)
-const i18n = createI18n({
+export const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: 'ru',
     fallbackLocale: 'ru',
     messages
 })
+
 const app = createApp(App)
 
 app.use(VueMask).use(i18n).use(router).use(store).use(ElementPlus).mount('#app')

@@ -4,18 +4,22 @@
     <router-view></router-view>
     <div @click="scroll" class="scroll-btn"></div>
     <el-row class="demo-autocomplete">
-    <el-col :span="20">
-      <div class="sub-title my-2 text-m text-gray-600">
-      </div>
-      <el-autocomplete
-        v-model="state1"
-        :fetch-suggestions="querySearch"
-        clearable
-        class="inline-input w-50"
-        placeholder="Please Input"
-        @select="handleSelect"
-      />
-    </el-col>
+      <el-col :span="20">
+        <input type="text"
+          v-model="state1"
+          class="input-search"
+          placeholder="Please Input"
+          @input="handleSelect(state1)"
+        >
+        <div v-if="searchData.length>0" class="result">
+        <div @click="goToProduct(res)" v-for="(res,index) in searchData" :key="index" class="card-result">
+          <div class="res-title"><p>{{ res.title }}</p></div>
+          <img class="res-img" :src="res.images[0]" alt="">
+          <div class="res-desc"><p>{{ res.description }}</p></div>
+          <div class="res-price"><p>{{ res.price }}$</p></div>
+        </div>
+        </div>
+      </el-col>
     </el-row>
     <el-carousel @click="goToProducts" :interval="5000" arrow="always">
       <el-carousel-item>
@@ -54,66 +58,103 @@
 import Navbar from "../components/Header/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import router from "../router/index";
-import { mapMutations,mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { ElButton } from "element-plus";
-import { ElRow, ElCol, ElCarousel,ElInput} from "element-plus";
+import { ElRow, ElCol, ElCarousel, ElInput } from "element-plus";
 export default {
   data() {
     return {
-      search:'',
-      state1:'',
-      restaurants:[],
-
+      state1: "",
     };
   },
   components: {
-    Navbar,Footer
+    Navbar,
+    Footer,
   },
   methods: {
-    ...mapActions(['search']),
+    ...mapActions(["search"]),
+    handleSelect(vak) {
+     this.search(vak)
+    },
     goToProducts() {
-    router.push("/products");
-},
-querySearch(queryString, cb){
-  const results = queryString
-    ? restaurants.value.filter(createFilter(queryString))
-    : restaurants.value
-  // call callback function to return suggestions
-  cb(results)
-},
-createFilter(queryString){
-  return (restaurant) => {
-    return (
-      restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-    )
-  }
-},
-fetchInput(){
-        fetch("https://dummyjson.com/products", {
-          method: "GET",
-        }).then((res) => {
-         console.log(res)
-        });
-      },
-  scroll(){
+      router.push("/products");
+    },
+    goToProduct(res){
+      this.$router.push("/products/" + res.id);
+    },
+    scroll() {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     },
-
-
   },
   computed: {
-   
+    ...mapGetters(["searchData"]),
   },
   mounted() {
-    this.fetchInput()
-}
-}
+  },
+};
 </script>
 <style>
+.result{
+  width: 800px;
+  background: rgb(223, 221, 221);
+  position: absolute;
+  left:13%;
+  z-index: 3;
+}
+.card-result{
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+.card-result:hover .res-desc{
+color: #da002b;
+}
+.card-result:hover .res-title{
+color: #da002b;
+}
+.card-result:hover .res-price{
+color: #da002b;
+}
+.res-title{
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+width: 100px;
+transition: 0.5s;
+}
+.res-img{
+width: 20%;
+transition: 0.5s;
+}
+.res-desc{
+  padding-left: 10px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+width: 400px;
+transition: 0.5s;
+}
+.res-price{
+width: 160px;
+font-size: 28px;
+justify-content: center;
+  display: flex;
+  align-items: center;
+  transition: 0.5s;
+}
+.input-search{
+  width: 500px;
+  height: 25px;
+  display: block;
+  margin: auto;
+}
 .el-carousel__container {
   height: 360px !important;
 }
@@ -134,12 +175,12 @@ fetchInput(){
 .row {
   width: 100%;
 }
-.el-input__wrapper{
-display: block!important;
-margin-left: 200px;
+.el-input__wrapper {
+  display: block !important;
+  margin-left: 200px;
 }
-.el-input__inner{
-    width: 800px!important;
+.el-input__inner {
+  width: 800px !important;
 }
 .scroll-btn {
   position: fixed;
@@ -157,7 +198,7 @@ margin-left: 200px;
   height: 60px;
   transition: 0.5s;
 }
-.scroll-btn:hover{
+.scroll-btn:hover {
   background: white;
 }
 .scroll-btn::before {

@@ -10,16 +10,9 @@ const cart = {
           products_in_cart: JSON.parse(localStorage.getItem('cart')),
           liked_products: JSON.parse(localStorage.getItem('favourite')),
           promo: '',
-          searchData:'',
-          search:'',
         }
       },
       mutations: {
-        SEARCH(state, payload) {
-          console.log(payload.products)
-          state.search=payload.products
-          console.log(payload.products)
-        },
         GET_FAVOURITE(state, payload) {
           state.favouriteProducts = payload
         },
@@ -141,12 +134,6 @@ const cart = {
           commit('setLoader')
           await axios.get('https://dummyjson.com/products').then((res) => {
             commit('SET_PRODUCTS', res.data)
-          })
-        },
-        async search({commit}){
-          await axios.get('https://dummyjson.com/products').then((res) => {
-            console.log(res)
-            commit('SEARCH', res.data)
           })
         },
         async fetchProductsByCart({ commit, state }) {

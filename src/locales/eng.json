@@ -1,11 +1,11 @@
 {
  
     "navbar": {
-        "index": "Рассрочка",
-        "price": "Скидки",
-        "news": "Розыгрыши",
-        "collaboration": "Каталог",
-        "favourite":"Избранное",
-        "cart":"Корзина"
+        "index": "Installment",
+        "price": "Discounts",
+        "news": "Prize draws",
+        "collaboration": "Catalog",
+        "favourite":"Favorites",
+        "cart":"Basket"
     }
 }

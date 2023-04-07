@@ -35,10 +35,9 @@ export default {
     Footer,
   },
   methods: {
-    ...mapActions(["fetchProducts","search"]),
+    ...mapActions(["fetchProducts"]),
     getProducts() {
-      this.fetchProducts();
-      this.search()
+      this.fetchProducts()
     },
     scroll(){
       window.scrollTo({

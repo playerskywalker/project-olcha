@@ -7,13 +7,19 @@
         <div class="nav-but-two">{{ $t('navbar.price') }}</div>
         <div class="nav-but">{{ $t('navbar.news') }}</div>
       </div>
-     <button @click="goToProducts" class="nav-button">
+      <div style="display: flex; align-items: center;">
+<button @click="goToProducts" class="nav-button">
       <div>
         <span class="ham"></span>
         <span class="ham"></span>
         <span class="ham"></span>
       </div>
       {{ $t('navbar.collaboration') }}</button>
+      <div class="lang">RU<label class="switch">
+  <input v-model="swi" @click="change" type="checkbox">
+  <span class="slider"></span>
+</label>EN</div>
+      </div>
     </nav>
     <div style="display: flex; justify-content: flex-end">
       <el-badge :value="liked_products?.length" class="item">
@@ -47,14 +53,23 @@
 <script>
 import { ElPageHeader, ElButton } from "element-plus";
 import { mapGetters } from "vuex";
+import {i18n} from '../../main'
 export default {
   name: "Navbar",
   data() {
     return {
       cartLength: 0,
+      swi:false
     };
   },
   methods: {
+    change(){
+      if(this.swi== true){
+        this.$i18n.locale='ru'
+      }else{
+        this.$i18n.locale='en'
+      }
+    },
     goToPage(link) {
       this.$router.push(link.path);
     },
@@ -77,7 +92,7 @@ export default {
   mounted() {},
 };
 </script>
-<style>
+<style scoped>
 *,
 *:before,
 *:after {
@@ -85,6 +100,64 @@ export default {
   margin: 0;
   border: 0;
 }
+.lang{
+ display: flex;
+ justify-content: center;
+
+}
+
+/* The switch - the box around the slider */
+.switch {
+ font-size: 17px;
+ position: relative;
+ display: inline-block;
+ width: 45px;
+ height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+ opacity: 1;
+ width: 0;
+ height: 0;
+}
+
+/* The slider */
+.slider {
+ position: absolute;
+ cursor: pointer;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0px;
+ background: #fff;
+ transition: .4s;
+ border-radius: 30px;
+ border: 1px solid #ccc;
+}
+
+.slider:before {
+ position: absolute;
+ content: "";
+ height: 1em;
+ width: 1em;
+ border-radius: 16px;
+ top: 0;
+ bottom: 0;
+ background-color: white;
+ box-shadow: 0 2px 5px #999999;
+ transition: .4s;
+}
+
+input:checked + .slider {
+ background-color: #ca80c0;
+ border: 1px solid transparent;
+}
+
+input:checked + .slider:before {
+ transform: translateX(1.5em);
+}
+
 .navbar {
   display: flex;
   background-repeat: no-repeat;
