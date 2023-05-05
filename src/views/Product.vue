@@ -392,6 +392,13 @@ export default {
 };
 </script>
 <style>
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
 .checkout-modal {
   position: absolute;
   display: flex;
