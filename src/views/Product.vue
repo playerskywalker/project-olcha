@@ -412,7 +412,7 @@ export default {
 }
 .modal-buy-now {
   width: 600px;
-  height: 470px;
+  height: 510px;
   background: white;
   border-radius: 10px;
   border: 5px solid #da002b;
